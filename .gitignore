@@ -1,5 +1,21 @@
-env/
-__pycache__/
-*.pyc
+# General
 .DS_Store
 node_modules/
+log/
+tmp/
+
+# Python environments
+env/
+venv/
+pyvenv.cfg
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# VSCode
+.vscode/
