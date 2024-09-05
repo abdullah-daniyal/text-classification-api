@@ -13,17 +13,14 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.8'
+          python-version: "3.8"
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-      - name: Zip required files
-        run: |
-          zip -r deploy.zip app.py requirements.txt
       - name: Deploy to Vercel
         run: |
           npm install -g vercel
-          vercel deploy --token ${{ secrets.VERCEL_TOKEN }} --prod --name my-project --files deploy.zip
+          vercel --token ${{ secrets.VERCEL_TOKEN }} --prod
         env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_ORG_ID: team_sqOBeUwAx6TIP6jbXQDUYUTU
+          VERCEL_PROJECT_ID: prj_UXFx20gDSX79tFulpY7wYmmFzUND
