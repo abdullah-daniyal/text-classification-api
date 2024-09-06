@@ -1,16 +1,21 @@
-from flask import Flask, request, jsonify
-from transformers import pipeline
+from flask import Flask, request, jsonify, render_template, url_for
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 classifier = pipeline('sentiment-analysis')
+
+@app.route('/', methods=['GET'])
+def home():
+    return render_template('index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    text = request.json.get('text', '')
+    text = request.form['text']  # Changed to handle form data
     if not text:
-        return jsonify({'error': 'No text provided'}), 400
+        return render_template('index.html', result="No text provided.")
+    
     result = classifier(text)
-    return jsonify(result)
+    response = f"Sentiment: {result[0]['label']} with a score of {result[0]['score']:.2%}"
+    return render_template('index.html', result=response)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
