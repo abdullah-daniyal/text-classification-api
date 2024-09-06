@@ -10,7 +10,7 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    text = request.form['text']  # Changed to handle form data
+    text = request.form['text'] 
     if not text:
         return render_template('index.html', result="No text provided.")
     
